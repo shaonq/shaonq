@@ -9,7 +9,8 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "webpack --config ./build/webpack.config.js"
+    "build": "webpack --config ./build/webpack.config.js",
+    "patch": "npm version patch"
   },
   "repository": {
     "type": "git",
