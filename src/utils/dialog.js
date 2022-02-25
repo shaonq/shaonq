@@ -273,7 +273,7 @@ function dialog() {
   };
 
   this.showLoading = content => {
-    let el = dom.el(".u-dialog__loading", el);
+    let el = dom.el(".u-dialog__loading");
     if (!el) {
       this.hideToast();
       return open({
