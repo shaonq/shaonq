@@ -1,0 +1,15 @@
+/** var */
+$font-color: #212121;
+$blue-color: #4795ef;
+$red-color: #ff4e20;
+$green-color: #11a668;
+$light-color: #888;
+$border-color: mix(lighten($light-color, 30%), $blue-color, 90%);
+$border-color--light: lighten($border-color, 14%);
+$space: 12px;
+$space--16: 16px;
+$space--20: 20px;
+
+
+/** 样式组 */
+$colors:('blue': $blue-color, 'red': $red-color, 'green': $green-color);
