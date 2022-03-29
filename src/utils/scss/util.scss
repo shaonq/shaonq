@@ -752,7 +752,7 @@ textarea.u-input {
 
   @for $i from 1 through 4 {
     i:nth-child(#{$i}):before {
-      animation-delay: -($i - 1s)/8;
+      animation-delay: calc(-($i - 1s) / 8);
     }
   }
 }
