@@ -1,6 +1,6 @@
 {
   "name": "shaonq",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "What's for dinner today ?",
   "main": "./src/index.js",
   "exports": {

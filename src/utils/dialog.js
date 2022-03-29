@@ -139,7 +139,17 @@ const dom = {
       return this.getScrollParent(parentNode)
     } catch (e) { }
     return window
-  }
+  },
+  setTransform(node, vale) {
+    let arr = ['webkit', 'Moz', 'O', 'ms'].map(i => `${i}Transform`);
+    arr.unshift('transform');
+    if (!this.isHTMLElement(node)) return;
+    for (let index in arr) {
+      if (node.style[arr[index]] !== undefined) {
+        return node.style[arr[index]] = vale;
+      }
+    }
+  },
 }
 
 let log = { attr: "data-u-dialog" };
@@ -671,13 +681,22 @@ function dialog() {
   }
 
   this.showImageView = function (node) {
-    let { dom, showModal, hideToast } = this;
-    let oldImg = node;
-    let { naturalWidth, naturalHeight } = oldImg;
+    const { dom, showModal, hideToast } = this;
+    const oldImg = node;
+    const { naturalWidth, naturalHeight } = oldImg;
     if (!dom.isHTMLElement(oldImg) && oldImg.nodeName !== "IMG") return;
-    let p = dom.position(oldImg);
-    let { width, height } = p;
+    const p = dom.position(oldImg);
+    const resetOldImg = el => {
+      el.style.left = p.left + 'px';
+      el.style.top = p.top + 'px';
+      el.style.width = p.width + 'px';
+      el.style.height = p.height + 'px';
+      dom.setTransform(el, 'scale(1)');
+    }
+    let width = p.width;
+    let height = p.height;
     let scale = 1;
+
     {
       let w = Math.min(window.innerWidth, naturalWidth);
       w = (w * 0.8) / width;
@@ -693,26 +712,21 @@ function dialog() {
       width: width + 'px',
       height: height + 'px',
       before(el) {
-        el.style.transition = 'all 0.3s ease-in-out';
-        el.style.left = p.left + 'px';
-        el.style.top = p.top + 'px';
-        el.style.width = p.width + 'px';
-        el.style.height = p.height + 'px';
-        el.style.transform = "scale(1)";
+        // 动画开始
+        el.style.transition = 'all 300ms ease-in-out';
+        resetOldImg(el)
+      },
+      after(el) {
+        // 动画结束
+        dom.addClass(el, "is-show");
+        resetOldImg(el)
       },
       success(index, el) {
         let body = dom.el(".u-dialog-body", el);
         body.style.padding = "0";
-        body.append(oldImg.cloneNode());
-        el.style.transform = `scale(${scale})`;
-      },
-      after(el) {
-        dom.addClass(el, "is-show");
-        el.style.left = p.left + 'px';
-        el.style.top = p.top + 'px';
-        el.style.width = p.width + 'px';
-        el.style.height = p.height + 'px';
-        el.style.transform = "scale(1)";
+        let newImg = oldImg.cloneNode(false);
+        body.append(newImg);
+        dom.setTransform(el, `scale(${scale})`);
       }
     })
   }

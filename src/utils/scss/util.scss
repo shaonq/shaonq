@@ -53,7 +53,7 @@ hr {
   }
 
   @for $i from 1 through 24 {
-    $width: calc(100% / 24) * $i;
+    $width: calc(100% / 24  * #{$i});
 
     .u-flex-#{$i} {
       max-width: $width;
