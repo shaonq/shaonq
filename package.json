@@ -1,15 +1,18 @@
 {
   "name": "shaonq",
-  "version": "1.0.4",
-  "description": "What's for dinner today ?",
+  "version": "1.0.5",
+  "description": "shaonq tools",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./scss": "./src/index.scss",
+    "./css": "./dist/main.css",
+    "./esm": "./dist/main.js",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "pub": "npm publish"
+    "pub": "npm publish .",
+    "build": "npx webpack --config  webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +20,24 @@
   },
   "keywords": [],
   "author": "shaonq",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "autoprefixer": "^10.4.4",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss": "^8.4.12",
+    "postcss-loader": "^6.2.1",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie < 11"
+  ]
 }

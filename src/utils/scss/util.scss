@@ -53,7 +53,7 @@ hr {
   }
 
   @for $i from 1 through 24 {
-    $width: calc(100% / 24  * #{$i});
+    $width: calc(100% / 24 * #{$i});
 
     .u-flex-#{$i} {
       max-width: $width;
@@ -738,8 +738,8 @@ textarea.u-input {
     &:before {
       content: "";
       position: absolute;
-      width: calc($width / 2);
-      height: calc($width / 2);
+      width: calc(#{$width} / 2);
+      height: calc(#{$width} / 2);
       left: 50%;
       top: 50%;
       // transform: translate(-50%, -50%);
@@ -752,7 +752,8 @@ textarea.u-input {
 
   @for $i from 1 through 4 {
     i:nth-child(#{$i}):before {
-      animation-delay: calc(-($i - 1s) / 8);
+      $tp:calc(#{$i} - 1s);
+      animation-delay: calc(-#{$tp} / 8);
     }
   }
 }
