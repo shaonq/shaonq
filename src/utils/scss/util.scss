@@ -752,8 +752,8 @@ textarea.u-input {
 
   @for $i from 1 through 4 {
     i:nth-child(#{$i}):before {
-      $tp:calc(#{$i} - 1s);
-      animation-delay: calc(-#{$tp} / 8);
+      // - 1s
+      animation-delay: calc((-#{$i}s) / 8);
     }
   }
 }

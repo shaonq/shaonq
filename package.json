@@ -5,9 +5,10 @@
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
-    "./scss": "./src/index.scss",
+    "./es5": "./dist/main.js",
     "./css": "./dist/main.css",
-    "./esm": "./dist/main.js",
+    "./es6": "./src/utils/index.js",
+    "./scss": "./src/index.scss",
     "./package.json": "./package.json"
   },
   "scripts": {
