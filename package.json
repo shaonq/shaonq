@@ -1,6 +1,6 @@
 {
   "name": "shaonq",
-  "version": "1.0.5",
+  "version": "1.0.4",
   "description": "shaonq tools",
   "main": "./src/index.js",
   "exports": {
@@ -12,7 +12,6 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "pub": "npm publish .",
     "build": "npx webpack --config  webpack.config.js"
   },
   "repository": {

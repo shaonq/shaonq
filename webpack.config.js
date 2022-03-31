@@ -5,10 +5,15 @@ function resolve(dir) {
 }
 module.exports = {
     mode: "production",
-    entry: "./src/index.js",
+    entry: {
+        index:"./src/index.js"
+    },
     output: {
         path: resolve("dist"), //打包后的出口
         filename: "[name].js",
+        library: 'shaonq', // 指定库的名称，及库的全局变量
+        libraryTarget: 'umd', // 支持库引入的方式
+        libraryExport: 'default'
     },
     resolve: {
         extensions: [".js", ".json", ".scss"],
