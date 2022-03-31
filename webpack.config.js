@@ -15,7 +15,6 @@ module.exports = {
         libraryTarget: 'umd', // 支持库引入的方式
         libraryExport: 'default',
     },
-    target: ['web', 'es5'],
     resolve: {
         extensions: [".js"],
         alias: {
@@ -56,7 +55,8 @@ module.exports = {
                     {
                         loader: "sass-loader",
                         options: { sourceMap: true },
-                    }, {
+                    },
+                    {
                         loader: "postcss-loader",
                         options: {
                             postcssOptions: {
