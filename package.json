@@ -1,12 +1,12 @@
 {
   "name": "shaonq",
-  "version": "1.0.4",
-  "description": "shaonq tools",
+  "version": "1.0.5",
+  "description": "当你不努力的时候，天赋就会一点一点被收回。",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
-    "./es5": "./dist/main.js",
-    "./css": "./dist/main.css",
+    "./es5": "./dist/index.js",
+    "./css": "./dist/index.css",
     "./es6": "./src/utils/index.js",
     "./scss": "./src/index.scss",
     "./package.json": "./package.json"
@@ -23,9 +23,11 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.17.5",
+    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.2.3",
+    "core-js": "3",
     "css-loader": "^6.7.1",
     "mini-css-extract-plugin": "^2.6.0",
     "postcss": "^8.4.12",

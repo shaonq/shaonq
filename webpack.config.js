@@ -6,17 +6,18 @@ function resolve(dir) {
 module.exports = {
     mode: "production",
     entry: {
-        index:"./src/index.js"
+        index: "./src/index.js"
     },
     output: {
         path: resolve("dist"), //打包后的出口
         filename: "[name].js",
         library: 'shaonq', // 指定库的名称，及库的全局变量
         libraryTarget: 'umd', // 支持库引入的方式
-        libraryExport: 'default'
+        libraryExport: 'default',
     },
+    target: ['web', 'es5'],
     resolve: {
-        extensions: [".js", ".json", ".scss"],
+        extensions: [".js"],
         alias: {
             "@": resolve("src"),
         },
@@ -30,13 +31,27 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                loader: "babel-loader",
+                exclude: /node_modules/,
                 include: [resolve("src")],
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ['@babel/preset-env', {
+                                targets: {
+                                    "ie": "10",
+                                },
+                                useBuiltIns: 'usage',
+                                corejs: 3
+                            }]
+                        ]
+                    }
+                }
             },
             {
-                test: /\.scss$/,// /\.(sa|sc|c)ss$/
+                test: /\.scss$/,
                 use: [
-                    { loader: MiniCssExtractPlugin.loader }, // style-loader
+                    { loader: MiniCssExtractPlugin.loader },
                     { loader: "css-loader" },
                     {
                         loader: "sass-loader",
