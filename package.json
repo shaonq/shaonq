@@ -1,6 +1,6 @@
 {
   "name": "shaonq",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "当你不努力的时候，天赋就会一点一点被收回。",
   "main": "./src/index.js",
   "exports": {
@@ -23,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.17.5",
-    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.16.11",
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.2.3",
