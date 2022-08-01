@@ -6,7 +6,7 @@ function resolve(dir) {
 module.exports = {
     mode: "production",
     entry: {
-        index: "./src/index.js"
+        index: "./index.js"
     },
     output: {
         path: resolve("dist"), //打包后的出口

@@ -485,7 +485,7 @@ function dialog() {
         }
 
         drawImage({ left: 0, top: 0 });
-        this.addMoveEvent({ el: canvas, success: drawImage })
+        this.moveEvent({ el: canvas, success: drawImage })
       });
     });
   };
@@ -494,7 +494,7 @@ function dialog() {
   /**
    * 添加一个move 事件
    */
-  this.addMoveEvent = function ({ el, success, doc = document }) {
+  this.moveEvent = function ({ el, success, doc = document }) {
     dom.on(el, "mousedown", e => {
       let clientX = e.pageX || e.clientX;
       let clientY = e.pageY || e.clientY;

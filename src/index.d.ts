@@ -15,11 +15,11 @@ declare const shaonq:{
 		toDate: (date:string|number) => Date ,
 		today: (src?:string) => string ,
 	},
-	loadJs: (src: string) => promise <void> ,
+	loadJs: (src: string) => Promise <void> ,
 	loadCss: (src: string, id ? : string) => void,
-	uniqueId: (before:string) => string,
-	refreshOffset: (el: HTMLElement ,offset:[string,string]) => void,
-	hideToast: (id:string) => void,
+	uniqueId: (before?:string) => string,
+	refreshOffset: (el: HTMLElement ,offset?:[string,string]) => void,
+	hideToast: (id?:string) => void,
 	toast: (content:string,time?:number) => string,
 	showLoading: (content:string) => string,
 	showSuccess: (content:string,time?:number) => string,
@@ -30,7 +30,7 @@ declare const shaonq:{
 	showDropdown: (options:{})=> string,
 	showContextMenu: (options:{})=> string,
 	uploadAvatar: (options:{})=> string,
-	addMoveEvent:(options:{})=> string,
+	moveEvent:(options:{})=> string,
 	showImageView: (node:HTMLElement)=> string,
 	stringify: (val:JSON) => string,
 	parse: (val:string) => JSON,
@@ -39,6 +39,6 @@ declare const shaonq:{
 	toThousands:(val:string)=> string,
 	toMB: (bytes:number)=> string,
 	setData: (object:{}, path:string, defaultValue:any)=>{},
-	merge: (object:{}, source={})=> {}
+	merge: (object:{}, source?:{})=> {}
 };
 export default shaonq;
