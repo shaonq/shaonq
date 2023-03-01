@@ -7,6 +7,7 @@
     ".": "./src/index.js",
     "./js": "./dist/index.js",
     "./css": "./dist/index.css",
+    "./dist/index.css": "./dist/index.css",
     "./scss": "./src/index.scss",
     "./package.json": "./package.json"
   },
