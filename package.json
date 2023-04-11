@@ -1,12 +1,13 @@
 {
   "name": "shaonq",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "当你不努力的时候，天赋就会一点一点被收回。",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
     "./js": "./dist/index.js",
     "./css": "./dist/index.css",
+    "./dist/index.js": "./dist/index.js",
     "./dist/index.css": "./dist/index.css",
     "./scss": "./src/index.scss",
     "./package.json": "./package.json"
