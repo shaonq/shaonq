@@ -3,141 +3,141 @@
 function format(date, format = 'yyyy-MM-dd') {
   if (!date) return '';
   if (typeof date !== "object") date = new Date(date);
-  const formatNumber = n => n < 10 ? ('0' + n) : n
-  const o = {};
-  o.yyyy = date.getFullYear()
-  o.MM = date.getMonth() + 1
-  o.dd = date.getDate()
-  o.HH = date.getHours()
-  o.mm = date.getMinutes()
-  o.ss = date.getSeconds()
-  return format.replace(/yyyy|MM|dd|HH|mm|ss/g, k => formatNumber(o[k]))
+  const pad = n => n < 10 ? '0' + n : n
+  const parts = {};
+  parts.yyyy = date.getFullYear()
+  parts.MM = date.getMonth() + 1
+  parts.dd = date.getDate()
+  parts.HH = date.getHours()
+  parts.mm = date.getMinutes()
+  parts.ss = date.getSeconds()
+  return format.replace(/yyyy|MM|dd|HH|mm|ss/g, k => pad(parts[k]))
 }
 
 export default {
   format,
   toString: format,
-  toDate: function (q) {
-    if (typeof q === "object") return q
-    else return new Date(q);
+  toDate: function (date) {
+    if (typeof date === "object") return date
+    else return new Date(date);
   },
-  getMonthDays: function (l, o) {
-    let m = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    let n = l.getFullYear();
-    if (typeof o === "undefined") {
-      o = l.getMonth()
+  getMonthDays: function (date, month) {
+    let days = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    let year = date.getFullYear();
+    if (typeof month === "undefined") {
+      month = date.getMonth()
     }
-    if (((0 === (n % 4)) && ((0 !== (n % 100)) || (0 === (n % 400)))) && o === 1) {
+    if (((0 === (year % 4)) && ((0 !== (year % 100)) || (0 === (year % 400)))) && month === 1) {
       return 29
     } else {
-      return m[o]
+      return days[month]
     }
   },
-  addDays: function (l, n, f) {
-    let m = (arguments.length === 1) ? this.toDate(this.today()) : this.toDate(n);
-    m = new Date(m.getTime() + parseInt(l) * 24 * 3600 * 1000);
-    return this.format(new Date(m), f)
+  addDays: function (days, date, format) {
+    let d = (arguments.length === 1) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d.getTime() + parseInt(days) * 24 * 3600 * 1000);
+    return this.format(new Date(d), format)
   },
-  addMonths: function (p, o, f) {
-    let l = (arguments.length === 1) ? this.toDate(this.today()) : this.toDate(o);
-    let m = l.getMonth();
-    let n = l.getDate();
-    let q = this.getMonthDays(l, l.getMonth() + parseInt(p));
-    if (n > q) {
-      l.setDate(q)
+  addMonths: function (months, date, format) {
+    let d = (arguments.length === 1) ? this.toDate(this.today()) : this.toDate(date);
+    let m = d.getMonth();
+    let n = d.getDate();
+    let monthDays = this.getMonthDays(d, d.getMonth() + parseInt(months));
+    if (n > monthDays) {
+      d.setDate(monthDays)
     }
-    l.setMonth(l.getMonth() + parseInt(p));
-    return this.format(l, f)
+    d.setMonth(d.getMonth() + parseInt(months));
+    return this.format(d, format)
   },
-  addMonthsForStart: function (n, m) {
-    let l = (arguments.length === 1) ? this.today() : m;
-    l = this.addMonths(n, l);
-    return this.firstDayOfMonth(l)
+  addMonthsForStart: function (months, date) {
+    let d = (arguments.length === 1) ? this.today() : date;
+    d = this.addMonths(months, d);
+    return this.firstDayOfMonth(d)
   },
-  addMonthsForEnd: function (n, m) {
-    let l = (arguments.length === 1) ? this.today() : m;
-    l = this.addMonths(n, l);
-    return this.addDays(-1, this.firstDayOfMonth(l))
+  addMonthsForEnd: function (months, date) {
+    let d = (arguments.length === 1) ? this.today() : date;
+    d = this.addMonths(months, d);
+    return this.addDays(-1, this.firstDayOfMonth(d))
   },
-  addYears: function (m, n, f) {
-    let l = (arguments.length === 1) ? this.toDate(this.today()) : this.toDate(n);
-    l.setYear(l.getFullYear() + parseInt(m));
-    return this.format(l, f)
+  addYears: function (years, date, format) {
+    let d = (arguments.length === 1) ? this.toDate(this.today()) : this.toDate(date);
+    d.setYear(d.getFullYear() + parseInt(years));
+    return this.format(d, format)
   },
-  addYearsForStart: function (l, n) {
-    let m = (arguments.length === 1) ? this.today() : n;
-    m = this.addYears(l, m);
-    return this.firstDayOfYear(m)
+  addYearsForStart: function (years, date) {
+    let d = (arguments.length === 1) ? this.today() : date;
+    d = this.addYears(years, d);
+    return this.firstDayOfYear(d)
   },
-  addYearsForEnd: function (l, n) {
-    let m = (arguments.length === 1) ? this.today() : n;
-    m = this.addYears(l, m);
-    return this.firstDayOfYear(m)
+  addYearsForEnd: function (years, date) {
+    let d = (arguments.length === 1) ? this.today() : date;
+    d = this.addYears(years, d);
+    return this.lastDayOfYear(d)
   },
-  sunOfWeek: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l = new Date(l - (l.getDay()) * (24 * 3600 * 1000));
-    return this.format(l, f)
+  sunOfWeek: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d - (d.getDay()) * (24 * 3600 * 1000));
+    return this.format(d, format)
   },
-  monOfWeek: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l = new Date(l - (l.getDay() - 1) * (24 * 3600 * 1000));
-    return this.format(l, f)
+  monOfWeek: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d - (d.getDay() - 1) * (24 * 3600 * 1000));
+    return this.format(d, format)
   },
-  tueOfWeek: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l = new Date(l - (l.getDay() - 2) * (24 * 3600 * 1000));
-    return this.format(l, f)
+  tueOfWeek: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d - (d.getDay() - 2) * (24 * 3600 * 1000));
+    return this.format(d, format)
   },
-  wedOfWeek: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l = new Date(l - (l.getDay() - 3) * (24 * 3600 * 1000));
-    return this.format(l, f)
+  wedOfWeek: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d - (d.getDay() - 3) * (24 * 3600 * 1000));
+    return this.format(d, format)
   },
-  turOfWeek: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l = new Date(l - (l.getDay() - 4) * (24 * 3600 * 1000));
-    return this.format(l, f)
+  turOfWeek: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d - (d.getDay() - 4) * (24 * 3600 * 1000));
+    return this.format(d, format)
   },
-  friOfWeek: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l = new Date(l - (l.getDay() - 5) * (24 * 3600 * 1000));
-    return this.format(l, f)
+  friOfWeek: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d - (d.getDay() - 5) * (24 * 3600 * 1000));
+    return this.format(d, format)
   },
-  satOfWeek: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l = new Date(l - (l.getDay() - 6) * (24 * 3600 * 1000));
-    return this.format(l, f)
+  satOfWeek: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d = new Date(d - (d.getDay() - 6) * (24 * 3600 * 1000));
+    return this.format(d, format)
   },
-  firstDayOfMonth: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l.setDate(1);
-    return this.format(l, f)
+  firstDayOfMonth: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d.setDate(1);
+    return this.format(d, format)
   },
-  lastDayOfMonth: function (l) {
-    l = (arguments.length === 0) ? this.today() : (l);
-    l = this.addMonths(1, l);
-    l = this.firstDayOfMonth(l);
-    l = this.addDays(-1, l);
-    return l
+  lastDayOfMonth: function (date) {
+    let d = (arguments.length === 0) ? this.today() : date;
+    d = this.addMonths(1, d);
+    d = this.firstDayOfMonth(d);
+    d = this.addDays(-1, d);
+    return d
   },
-  firstDayOfYear: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l.setMonth(0);
-    l.setDate(1);
-    return this.format(l, f)
+  firstDayOfYear: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d.setMonth(0);
+    d.setDate(1);
+    return this.format(d, format)
   },
-  lastDayOfYear: function (m, f) {
-    let l = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(m);
-    l.setMonth(11);
-    l.setDate(31);
-    return this.format(l, f)
+  lastDayOfYear: function (date, format) {
+    let d = (arguments.length === 0) ? this.toDate(this.today()) : this.toDate(date);
+    d.setMonth(11);
+    d.setDate(31);
+    return this.format(d, format)
   },
-  today: function (l) {
+  today: function (format) {
     if (arguments.length === 0) {
       return this.format(new Date(), "yyyy-MM-dd")
     } else {
-      return this.format(new Date(), l)
+      return this.format(new Date(), format)
     }
   }
 }

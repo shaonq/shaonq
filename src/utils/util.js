@@ -15,7 +15,7 @@ function merge(object, source) {
       //typeof Array loop
       obj[key] = srcValue.map((item, idx) => {
         if (typeof item === "object")
-          return merge((item[key] || [])[idx] || {}, item);
+          return merge((obj[key] || [])[idx] || {}, item);
         return item;
       });
     } else obj[key] = srcValue;

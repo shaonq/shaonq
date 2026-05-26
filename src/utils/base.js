@@ -1,3 +1,5 @@
+import util from './util';
+
 export default {
   loadJs: function (src) {
     return new Promise((resolve, reject) => {
@@ -43,7 +45,6 @@ export default {
       (d.ios = !!ua.match(/(iphone|ipod|ipad)/i)),
       (d.android = !!ua.match(/android/i)),
       (d.wechat = !!ua.match(/micromessenger/i)),
-      (ua = ua.match(/msie \d+?/i)),
       (d.ie = (function () {
         let t = navigator.userAgent.toLowerCase();
         return window.ActiveXObject || "ActiveXObject" in window

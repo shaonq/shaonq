@@ -9,7 +9,7 @@ hr {
 }
 
 .u-color-light {
-  color: $light-color
+  color: $light-color;
 }
 
 .u-inline {
@@ -25,11 +25,10 @@ hr {
 
   &__item {
     flex: 1;
+    min-width: 0;
 
     &.is-clamp {
-      min-width: 0;
-
-      &>* {
+      & > * {
         display: block;
         white-space: nowrap;
         overflow: hidden;
@@ -52,18 +51,18 @@ hr {
     flex-wrap: wrap;
   }
 
-  @for $i from 1 through 24 {
-    $width: calc(100% / 24 * #{$i});
+  // @for $i from 1 through 24 {
+  //   $width: calc(100% / 24 * #{$i});
 
-    .u-flex-#{$i} {
-      max-width: $width;
-      flex: 0 0 $width
-    }
+  //   .u-flex-#{$i} {
+  //     max-width: $width;
+  //     flex: 0 0 $width;
+  //   }
 
-    .u-flex-push-#{$i} {
-      left: $width
-    }
-  }
+  //   .u-flex-push-#{$i} {
+  //     left: $width;
+  //   }
+  // }
 }
 
 // 间隔
@@ -154,7 +153,6 @@ hr {
   position: relative;
   overflow: hidden;
 
-
   input[type="file"] {
     position: absolute;
     top: 0;
@@ -203,7 +201,7 @@ hr {
     clear: both;
   }
 
-  &+& {
+  & + & {
     margin-top: $space;
   }
 
@@ -212,142 +210,9 @@ hr {
     line-height: 1.67;
     color: #333;
 
-    &+& {
+    & + & {
       border-top: 1px solid $border-color--light;
     }
-  }
-}
-
-// tooltip 等待scss重构
-[tooltip] {
-  position: relative;
-
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 300ms;
-    pointer-events: none;
-    transition-property: opacity;
-  }
-
-  &:after {
-    content: attr(aria-label);
-    top: 50%;
-    left: 100%;
-    white-space: nowrap;
-    padding: 5px 12px;
-    background-color: rgba(37, 38, 45, 0.9);
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.15);
-    color: #fff;
-    border: 0;
-    text-align: center;
-    border-radius: 3px;
-    max-width: 350px;
-    line-height: 1.4;
-    font-size: 13px;
-    z-index: 1;
-  }
-
-  &:hover:after {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  &:hover:before {
-    opacity: 1;
-    border: 6px solid transparent;
-    visibility: visible;
-    z-index: 2;
-  }
-
-  &:after {
-    transform: translate(-10px, -50%);
-  }
-
-  &:hover:after,
-  &:hover:before {
-    transform: translate(10px, -50%);
-  }
-
-  &:hover:before {
-    top: 50%;
-    right: 0;
-    border-color: transparent;
-    border-right-color: #333;
-    border-right-width: 6px;
-  }
-
-  &[tooltip="top"]:after {
-    top: auto;
-    left: 50%;
-    bottom: 100%;
-    transform: translate(-50%, 5px);
-  }
-
-  &[tooltip="top"]:hover:after,
-  &[tooltip="top"]:hover:before {
-    transform: translate(-50%, -10px);
-  }
-
-  &[tooltip="top"]:before {
-    left: 50%;
-    top: 0;
-    right: auto;
-    border-color: transparent;
-    border-top-color: #333;
-    border-top-width: 6px;
-  }
-
-  &[tooltip="bottom"]:after {
-    top: 100%;
-    left: 50%;
-    bottom: auto;
-    transform: translate(-50%, -10px);
-  }
-
-  &[tooltip="bottom"]:hover:after,
-  &[tooltip="bottom"]:hover:before {
-    transform: translate(-50%, 10px);
-  }
-
-  &[tooltip="bottom"]:before {
-    left: 50%;
-    bottom: 0;
-    top: auto;
-    right: auto;
-    border-color: transparent;
-    border-bottom-color: #333;
-    border-bottom-width: 6px;
-  }
-
-  &[tooltip="left"]:after {
-    top: 50%;
-    right: 100%;
-    left: auto;
-    bottom: auto;
-    transform: translate(10px, -50%);
-  }
-
-  &[tooltip="left"]:hover:after,
-  &[tooltip="left"]:hover:before {
-    transform: translate(-10px, -50%);
-  }
-
-  &[tooltip="left"]:before {
-    top: 50%;
-    left: 0;
-    right: auto;
-    border-color: transparent;
-    border-left-color: #333;
-    border-left-width: 6px;
-  }
-
-  &[aria-label=""]:after,
-  &[aria-label=""]:before {
-    content: none !important;
   }
 }
 
@@ -375,7 +240,6 @@ hr {
     border-radius: 50%;
   }
 
-
   &.u-btn--small {
     font-size: 13px;
     height: 24px;
@@ -387,7 +251,7 @@ hr {
     width: 100%;
   }
 
-  &+& {
+  & + & {
     margin-left: $space;
   }
 
@@ -430,24 +294,24 @@ hr {
   &__group {
     font-size: 0;
 
-    &>.u-btn:not(:first-child):not(:last-child) {
+    & > .u-btn:not(:first-child):not(:last-child) {
       border-radius: 0;
     }
 
-    &>.u-btn+.u-btn {
+    & > .u-btn + .u-btn {
       margin-left: 0;
     }
 
-    &>.u-btn:not(:last-child) {
+    & > .u-btn:not(:last-child) {
       margin-right: -1px;
     }
 
-    &>.u-btn:first-child {
+    & > .u-btn:first-child {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
 
-    &>.u-btn:last-child {
+    & > .u-btn:last-child {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
@@ -492,8 +356,7 @@ hr {
 }
 
 /** 按钮样式  */
-@each $name,
-$color in $colors {
+@each $name, $color in $colors {
   .u-color-#{$name} {
     color: $color;
   }
@@ -595,26 +458,25 @@ textarea.u-input {
 }
 
 .u-radio {
-
-  &:hover input:not(:checked)+#{&}__icon,
-  input:not(:checked)+.u-checkbox__icon:hover {
+  &:hover input:not(:checked) + #{&}__icon,
+  input:not(:checked) + .u-checkbox__icon:hover {
     background-color: $border-color--light;
   }
 
   input {
-    &:disabled+.u-radio__icon {
+    &:disabled + .u-radio__icon {
       background-color: $border-color--light;
       opacity: 0.5;
       cursor: default;
       pointer-events: none;
     }
 
-    &:checked+.u-radio__icon:after {
+    &:checked + .u-radio__icon:after {
       transform: translate(-50%, -50%) scale(1);
       background-color: $blue-color;
     }
 
-    &:checked:disabled+.u-radio__icon:after {
+    &:checked:disabled + .u-radio__icon:after {
       background-color: $border-color;
     }
   }
@@ -635,26 +497,25 @@ textarea.u-input {
 }
 
 .u-checkbox {
-
-  &:hover input:not(:checked)+#{&}__icon,
-  input:not(:checked)+.u-checkbox__icon:hover {
+  &:hover input:not(:checked) + #{&}__icon,
+  input:not(:checked) + .u-checkbox__icon:hover {
     background-color: $border-color--light;
   }
 
   input {
-    &:disabled+.u-checkbox__icon {
+    &:disabled + .u-checkbox__icon {
       background-color: $border-color--light;
       opacity: 0.5;
       cursor: default;
       pointer-events: none;
     }
 
-    &:checked+.u-checkbox__icon:after {
+    &:checked + .u-checkbox__icon:after {
       transform: rotate(45deg) scaleY(1);
       border-color: $blue-color;
     }
 
-    &:checked:disabled+.u-checkbox__icon:after {
+    &:checked:disabled + .u-checkbox__icon:after {
       border-color: $border-color;
     }
   }
@@ -759,7 +620,6 @@ textarea.u-input {
 }
 
 @keyframes u-looping {
-
   0%,
   100% {
     transform: translateY(-100%);
@@ -812,7 +672,7 @@ textarea.u-input {
     display: inline-block;
     width: 160px;
 
-    &+& {
+    & + & {
       margin-left: 16px;
     }
   }
@@ -834,7 +694,6 @@ textarea.u-input {
       padding-left: 100px;
     }
   }
-
 }
 
 /** 骨架 */
@@ -993,4 +852,37 @@ textarea.u-input {
     transform: translate(0) scaleX(1);
     opacity: 0;
   }
+}
+
+.u-cl::before,
+.u-cl::after {
+  display: table;
+  content: "";
+}
+
+.u-cl::after {
+  clear: both;
+}
+
+.u-h {
+  position: relative;
+  height: 100%;
+}
+
+.u-w {
+  position: relative;
+  width: 100%;
+}
+
+.u-pre {
+  margin: 1.4em 0;
+  padding: 0.8889em;
+  overflow: auto;
+  font-size: 0.9em;
+  white-space: pre-wrap;
+  word-wrap: normal;
+  word-break: normal;
+  background: #f6f6f6;
+  border-radius: 4px;
+  -webkit-overflow-scrolling: touch;
 }

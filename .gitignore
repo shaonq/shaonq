@@ -17,7 +17,7 @@
 *.sw?
 *.tgz
 *.lock
-
+*-lock.json
 # files
 /node_modules
 /build

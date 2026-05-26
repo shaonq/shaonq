@@ -283,6 +283,7 @@ function dialog() {
    * @param {Array} value: default value
    */
   log.createContextLabel = ({ skin, list, value = "" }) => {
+    const render = children => log.createContextLabel({ skin, list: children, value });
     return list.reduce((html, item, index) => {
       let childrenHtml = '', isChildren = item.children && item.children.length
       if (isChildren) childrenHtml = render(item.children);

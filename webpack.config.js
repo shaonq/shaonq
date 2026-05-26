@@ -9,6 +9,7 @@ module.exports = {
         index: "./index.js"
     },
     output: {
+        clean: true,
         path: resolve("dist"), //打包后的出口
         filename: "[name].js",
         library: 'shaonq', // 指定库的名称，及库的全局变量
