@@ -12,9 +12,16 @@
     "./scss": "./src/index.scss",
     "./package.json": "./package.json"
   },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE"
+  ],
   "types": "./src/index.d.ts",
   "scripts": {
-    "build": "npx webpack --config  webpack.config.js"
+    "build": "npx webpack --config  webpack.config.js",
+    "prepublishOnly": "npm run build",
+    "release": "npm publish --registry https://registry.npmjs.org"
   },
   "repository": {
     "type": "git",
